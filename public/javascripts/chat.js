@@ -21,22 +21,23 @@ $(document).ready(function(){
 
            });
            $("#userlist").append('</ul>');
+           $("#dialog").prepend('<div class="speech_item">' + data.user.userName +  '加入了聊天</div>');
        },
        onLogout:function(data){
            $("#userlist").empty();
            $("#userlist").append('<h4>在线用户('+data.onlineCount+'人)</h4><ul>');
            $.each(data.onlineUsers,function(i,n){
                $("#userlist").append('<li id="' + i + '">' + n + '</li>');
-
            });
            $("#userlist").append('</ul>');
+           $("#dialog").prepend('<div class="speech_item">' + data.user.username +  '退出了聊天</div>');
        },
        onMessage:function(data){
            $("#dialog").prepend('<div class="speech_item">' + data.username + ' <br> ' + data.time + '<div style="clear:both;"></div><p class="triangle-isosceles top">' + data.content + '</p> </div>');
        },
        login:function(){
            name = prompt('输入你的名字：', '');
-           if (!name || name == null) {
+           if (!name || name == null||name=='null') {
                alert("输入名字为空，请重新输入！");
                chat.login();
                return;
