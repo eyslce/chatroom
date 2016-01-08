@@ -1,0 +1,3 @@
+{
+  "connString":"mysql://root:@localhost/im"
+}

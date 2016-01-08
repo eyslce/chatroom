@@ -1,0 +1,16 @@
+extends layout
+block content
+    div user test
+        table
+            thead
+               th id
+               th account
+               th createdAt
+               th updatedAt
+            tbody
+                tr
+                  td!= data.id
+                  td!= data.account
+                  td!= data.createdAt
+                  td!= data.updatedAt
+

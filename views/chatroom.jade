@@ -1,0 +1,26 @@
+doctype html
+html
+    head
+        meta(http-equiv="Content-Type",content="text/html; charset=utf-8")
+        title chatroom
+        link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        script(type='text/javascript',src='/javascripts/jquery-1.11.3.min.js')
+    body(style='padding-top: 20px;')
+        div.container
+            div.row.clearfix
+                div.col-md-1.column
+                div.col-md-6.column
+                    form#msg_form
+                        p#current_user 当前用户：
+                        textarea#textarea.textarea.thumbnail
+                        div.say-btn
+                            input#clear(type="button",class="btn btn-default",value="清屏")
+                            input(type="submit" class="btn btn-default" value="发表")
+                    div.thumbnail
+                        div#dialog(class="caption",style="width:100%;height: 300px;overflow-y: auto;")
+                div.col-md-3.column
+                    div.thumbnail
+                        div#userlist.caption
+    script(src="https://cdn.socket.io/socket.io-1.4.1.min.js")
+    script(type='text/javascript',src='/javascripts/chat.js')
