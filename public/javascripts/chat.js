@@ -36,7 +36,7 @@ $(document).ready(function(){
            $("#dialog").prepend('<div class="speech_item">' + data.username + ' <br> ' + data.time + '<div style="clear:both;"></div><p class="triangle-isosceles top">' + data.content + '</p> </div>');
        },
        login:function(){
-           name = prompt('输入你的名字：', '');
+           var name = prompt('输入你的名字：', '');
            if (!name || name == null||name=='null') {
                alert("输入名字为空，请重新输入！");
                chat.login();
@@ -65,7 +65,7 @@ $(document).ready(function(){
                chat.onMessage(data);
            })
        }
-   }
+   };
 
     //初始化
     chat.init();
