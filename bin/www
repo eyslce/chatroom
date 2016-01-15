@@ -91,6 +91,7 @@ function onListening() {
 
 //在线用户
 var onlineUsers = {};
+var sockets={};
 //当前在线人数
 var onlineCount = 0;
 io.on('connection',function(socket){
@@ -104,6 +105,9 @@ io.on('connection',function(socket){
             //在线人数+1
             onlineCount++;
         }
+        if(!sockets.hasOwnProperty(obj.userId)){
+            sockets[obj.userId]=socket;
+        }
         //向所有客户端广播用户加入
         io.emit('login', {onlineUsers:onlineUsers, onlineCount:onlineCount, user:obj});
     });
@@ -115,6 +119,7 @@ io.on('connection',function(socket){
             var obj = {userid:socket.name, username:onlineUsers[socket.name]};
             //删除
             delete onlineUsers[socket.name];
+            delete sockets[socket.name];
             //在线人数-1
             onlineCount--;
             //向所有客户端广播用户退出
@@ -128,4 +133,11 @@ io.on('connection',function(socket){
         obj.time = (new Date()).toLocaleString();
         io.emit('message', obj);
     });
+    //私聊消息
+    socket.on('private_msg',function(from,to,msg){
+        if(onlineUsers.hasOwnProperty(to)){
+            sockets[to].emit('private_msg',{from:{userId:from,userName:onlineUsers[from]},to:{userId:to,userName:onlineUsers[to]},msg:msg,time:(new Date()).toLocaleString()});
+            socket.emit('private_msg',{from:{userId:from,userName:onlineUsers[from]},to:{userId:to,userName:onlineUsers[to]},msg:msg,time:(new Date()).toLocaleString()});
+        }
+    })
 });

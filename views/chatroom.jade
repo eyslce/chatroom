@@ -6,6 +6,7 @@ html
         link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
         link(rel='stylesheet', href='/stylesheets/style.css')
         script(type='text/javascript',src='/javascripts/jquery-1.11.3.min.js')
+        script(type='text/javascript',src='/javascripts/bootstrap.min.js')
     body(style='padding-top: 20px;')
         div.container
             div.row.clearfix
@@ -13,12 +14,22 @@ html
                 div.col-md-6.column
                     form#msg_form
                         p#current_user 当前用户：
+                        p
+                          input#color(type="color",style="float:left;margin:0;padding:0;border:0;")
+                          input#emoji(type="button",value="Emoji",style="float:left;")
+                          input#img(type="file",accept="image/gif,image/jpeg,image/png",name="file",style="margin-left:3px;")
                         textarea#textarea.textarea.thumbnail
                         div.say-btn
                             input#clear(type="button",class="btn btn-default",value="清屏")
                             input(type="submit" class="btn btn-default" value="发表")
-                    div.thumbnail
-                        div#dialog(class="caption",style="width:100%;height: 300px;overflow-y: auto;")
+                    div
+                        ul(class="nav nav-tabs",role="tablist")
+                            li(role="presentation",class="active")
+                               a(href="#all_tab",aria-controls="all_tab",role="tab",data-toggle="tab") 所有人
+                        div.tab-content
+                            div(role="tabpanel",class="tab-pane active",id="all_tab")
+                                div.thumbnail
+                                    div#dialog(class="caption",style="width:100%;height: 300px;overflow-y: auto;")
                 div.col-md-3.column
                     div.thumbnail
                         div#userlist.caption
